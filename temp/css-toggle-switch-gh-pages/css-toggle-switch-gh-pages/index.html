@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>CSS Toggle Switches</title>
+	<meta name="description" content="Accessible, screen-reader friendly, CSS-only toggle switches with full keyboard access and mobile support, using standard form controls.">
+	<meta name="author" content="Ionuț Colceriu">
+	
+	<!-- Standalone demo styles, not required by the toggles --->
+	<link rel="stylesheet" href="demo.css">
+	
+	<!-- Toggle Switch -->
+	<link rel="stylesheet" href="toggle-switch.css">
+	
+	<!-- Prism Syntax Highlighter -->
+    <link rel="stylesheet" href="lib/prism/prism.css">
+    <script src="lib/prism/prism.js"></script>
+</head>
+<body>
+
+	<div class="container-narrow">
+				
+				<label>View</label>
+				<div class="switch switch-three candy blue">
+					<input id="view1" name="view" type="radio" value="default" checked>
+								<label for="view1">default</label>
+								<input id="view2" name="view" type="radio" value="on">	
+								<label for="view2">on</label>	
+								<input id="view3" name="view" type="radio" value="off">	
+								<label for="view3">off</label>
+					
+					<span class="slide-button"></span>
+				</div>
+				
+	</div>
+	
+</body>
+</html>

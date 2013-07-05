@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="author" content="Sokratis Karkalas">  
+
+	<title>IFCPLearning</title>
+
+	<link rel="icon" type="image/x-icon" href="./images/monitor.ico">   
+	<link rel="stylesheet" type="text/css" href="./styles/jquery-ui-1.10.3.custom.min.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="./styles/toggle-switch.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="./styles/mainview.css" media="screen">
+
+	<script type="text/javascript" charset="utf-8" src="./scripts/jquery-2.0.2.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="./scripts/jquery-ui-1.10.3.custom.min.js"></script>	
+	<script type="text/javascript" charset="utf-8" src="./scripts/graphics.js"></script> 
+	<script type="text/javascript" charset="utf-8" src="./scripts/jslint.js"></script> 
+	<script type="text/javascript" charset="utf-8" src="./scripts/aceeditor/ace.js"></script> 
+	<script type="text/javascript" charset="utf-8" src="./scripts/jquery.jqDock.min.js"></script>	
+	<script type="text/javascript" charset="utf-8" src="./scripts/mainview.js"></script> 
+</head>
+  
+<body>
+
+<div id="banner">
+	<img id="logo" src="./images/fractal.gif"></img>
+	<div id="logotext">
+		<span id="logotext1">IFCP</span><span id="logotext2">Learning</span>
+	</div>
+	<div id="logotextfull">
+		<b>I</b>ntelligent, <b>F</b>lexible, <b>C</b>ollaborative, <b>P</b>ersonalised <b>Learning</b>
+	</div>
+</div>
+
+<div id="mainviewcontainer">
+		<div id="menuviewcontainer">
+			<div id="menuview">
+				<h3>Menu</h3>
+				<ul id="menu" style='font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif;font-size:14px;'>
+				<li><a href="#"><span class="ui-icon ui-icon-play"></span>Execute</a></li>
+				<li><a href="#"><span class="ui-icon ui-icon-lightbulb"></span>Get Help</a></li>
+				<li><a href="#"><span class="ui-icon ui-icon-check"></span>Assess</a></li>
+				<li><a href="#"><span></span>Misc</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="workviewcontainer">
+		<div id="codeviewcontainer">
+			<div id="codeview">		
+				<h3>Editor</h3>
+				<div id="editorview">
+				<div id="editor">
+(
+	function foo()
+	{
+		var i;
+		var message="";
+		
+		for (i = 0; i &lt; arguments.length; i++)
+		{			
+			message += arguments[i];
+		}
+		
+		alert(message + "Learning");
+	}
+)('I','F','C','P');
+				</div>
+				</div>
+				<h3>Language Reference</h3>
+				<div>
+				<p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui. </p>
+				<ul>
+				<li>List item one</li>
+				<li>List item two</li>
+				<li>List item three</li>
+				</ul>
+				</div>
+			</div>
+		</div>
+		<div id="outputviewcontainer">
+			<div id="outputview">
+				<h3>Output</h3>
+				<div id="output">
+					<div id="cube">
+						<figure class="front">
+							<canvas id="canvas"></canvas>
+						</figure>
+						<figure class="back">
+							<div id="textoutput"></div>
+						</figure>
+						<figure class="right">
+							<div id="debugoutput"></div>
+						</figure>
+						<figure class="left">
+							<div id="helpoutput"></div>
+						</figure>
+						<figure class="top">
+							<div id="assessmentoutput"></div>
+						</figure>
+						<figure class="bottom">
+							<div id="miscoutput"></div>
+						</figure>
+					</div>
+				</div>
+				<h3>Settings</h3>
+				<div>
+				<fieldset>
+				<legend>General Editor Settings</legend>
+					<table id="generalsettings">
+					<tr>
+					<td >
+					<label for="theme">Theme</label>
+					</td>
+					<td>
+					<select id="theme" size="1" onchange="setTheme(this)">
+					<optgroup label="Bright">
+						<option value="ace/theme/chrome">Chrome</option>
+						<option value="ace/theme/clouds">Clouds</option>
+						<option value="ace/theme/crimson_editor">Crimson Editor</option>
+						<option value="ace/theme/dawn">Dawn</option>
+						<option value="ace/theme/dreamweaver">Dreamweaver</option>
+						<option value="ace/theme/eclipse" selected="selected">Eclipse</option>
+						<option value="ace/theme/github">GitHub</option>
+						<option value="ace/theme/solarized_light">Solarized Light</option>
+						<option value="ace/theme/textmate">TextMate</option>
+						<option value="ace/theme/tomorrow">Tomorrow</option>
+						<option value="ace/theme/xcode">XCode</option>
+					</optgroup>
+					<optgroup label="Dark">
+						<option value="ace/theme/ambiance">Ambiance</option>
+						<option value="ace/theme/chaos">Chaos</option>
+						<option value="ace/theme/clouds_midnight">Clouds Midnight</option>
+						<option value="ace/theme/cobalt">Cobalt</option>
+						<option value="ace/theme/idle_fingers">idleFingers</option>
+						<option value="ace/theme/kr_theme">krTheme</option>
+						<option value="ace/theme/merbivore">Merbivore</option>
+						<option value="ace/theme/merbivore_soft">Merbivore Soft</option>
+						<option value="ace/theme/mono_industrial">Mono Industrial</option>
+						<option value="ace/theme/monokai">Monokai</option>
+						<option value="ace/theme/pastel_on_dark">Pastel on dark</option>
+						<option value="ace/theme/solarized_dark">Solarized Dark</option>
+						<option value="ace/theme/terminal">Terminal</option>
+						<option value="ace/theme/tomorrow_night">Tomorrow Night</option>
+						<option value="ace/theme/tomorrow_night_blue">Tomorrow Night Blue</option>
+						<option value="ace/theme/tomorrow_night_bright">Tomorrow Night Bright</option>
+						<option value="ace/theme/tomorrow_night_eighties">Tomorrow Night 80s</option>
+						<option value="ace/theme/twilight">Twilight</option>    
+						<option value="ace/theme/vibrant_ink">Vibrant Ink</option>
+					</optgroup>
+					</select>
+					</td>
+					</tr>
+					<tr>
+					<td>
+					<label for="fontsize">Font Size</label>
+					</td>
+					<td>
+					<select id="fontsize" size="1" onchange="setFontSize(this)">
+						<option value="10px">10px</option>
+						<option value="11px">11px</option>
+						<option value="12px" selected="selected">12px</option>
+						<option value="13px">13px</option>
+						<option value="14px">14px</option>
+						<option value="16px">16px</option>
+						<option value="18px">18px</option>
+						<option value="20px">20px</option>
+						<option value="24px">24px</option>
+					</select>
+					</td>
+					</tr>
+					<tr>
+					<td>
+					<label for="folding">Code Folding</label>
+					</td>
+					<td>
+					<select id="folding" size="1" onchange="setFolding(this)">
+						<option value="manual">manual</option>
+						<option value="markbegin" selected="selected">mark begin</option>
+						<option value="markbeginend">mark begin and end</option>
+					</select>
+					</td>
+					</tr>
+					<tr>
+					<td>
+					<label for="soft_wrap">Soft Wrap</label>
+					</td>
+					<td>
+					<select id="soft_wrap" size="1" onchange="setSoftWrap(this)">
+						<option value="off">Off</option>
+						<option value="40">40 Chars</option>
+						<option value="80">80 Chars</option>
+						<option value="free">Free</option>
+					</select>
+					</td>
+					</tr>
+					</table>
+				</fieldset>
+				<br/>
+				<fieldset>
+				<legend>Special Editor Settings</legend>
+					<table id="specialsettings">
+					<tr>	
+					<td>
+					<label for="select_style">Full Line Selection</label>
+					</td>
+					<td>
+					<input type="checkbox" name="select_style" id="select_style" onchange="setSelectStyle(this)" checked>
+					</td>
+					</tr>
+					<tr>
+					<td>
+					<label for="highlight_active">Highlight Active Line</label>
+					</td>
+					<td>
+					<input type="checkbox" name="highlight_active" id="highlight_active" onchange="setHighlightActive(this)" checked>
+					</td>
+					</tr>
+					<tr>
+					<td>
+					<label for="show_hidden">Show Invisibles</label>
+					</td>
+					<td>
+					<input type="checkbox" name="show_hidden" id="show_hidden" onchange="setShowHidden(this)">
+					</td>
+					</tr>
+					<tr>
+					<td>
+					<label for="display_indent_guides">Show Indent Guides</label>
+					</td>
+					<td>
+					<input type="checkbox" name="display_indent_guides" id="display_indent_guides" onchange="setDisplayIndentGuides(this)" checked>
+					</td>
+					</tr>
+					<tr>
+					<td>
+					<label for="show_hscroll">Persistent HScroll</label>
+					</td>
+					<td>
+					<input type="checkbox" name="show_hscroll" id="show_hscroll" onchange="setShowHscroll(this)">
+					</td>
+					</tr>
+					<tr>
+					<td>
+					<label for="animate_scroll">Animate scrolling</label>
+					</td>
+					<td>
+					<input type="checkbox" name="animate_scroll" id="animate_scroll" onchange="setAnimateScroll(this)">
+					</td>
+					</tr>
+					<tr>
+					<td>
+					<label for="show_gutter">Show Gutter</label>
+					</td>
+					<td>
+					<input type="checkbox" id="show_gutter" onchange="setShowGutter(this)" checked>
+					</td>
+					</tr>
+					<tr>
+					<td>
+					<label for="show_print_margin">Show Print Margin</label>
+					</td>
+					<td>
+					<input type="checkbox" id="show_print_margin" onchange="setShowPrintMargin(this)" checked>
+					</td>
+					</tr>
+					<tr>
+					<td>
+					<label for="soft_tab">Use Soft Tab</label>
+					</td>
+					<td>
+					<input type="checkbox" id="soft_tab" onchange="setSoftTab(this)" checked>
+					</td>
+					</tr>
+					<tr>
+					<td>
+					<label for="highlight_selected_word">Highlight selected word</label>
+					</td>
+					<td>
+					<input type="checkbox" id="highlight_selected_word" onchange="setHighlightSelectedWord(this)" checked>
+					</td>
+					</tr>
+					<tr>
+					<td>
+					<label for="enable_behaviours">Enable Behaviours</label>
+					</td>
+					<td>
+					<input type="checkbox" id="enable_behaviours" onchange="setEnableBehaviours(this)">
+					</td>
+					</tr>
+					<tr>
+					<td>
+					<label for="fade_fold_widgets">Fade Fold Widgets</label>
+					</td>
+					<td>
+					<input type="checkbox" id="fade_fold_widgets" onchange="setFadeFoldWidgets(this)">
+					</td>
+					</tr>
+					<tr>
+					<td>
+					<label for="elastic_tabstops">Enable Elastic Tabstops</label>
+					</td>
+					<td>
+					<input type="checkbox" id="elastic_tabstops" onchange="setElasticTabStops(this)">
+					</td>
+					</tr>
+					<tr>
+					<td>
+					<label for="isearch">Incremental Search</label>
+					</td>
+					<td>
+					<input type="checkbox" id="isearch" onchange="setISearch(this)">
+					</td>
+					</tr>
+					<tr>
+					<td>
+					<label for="highlight_token">Show token info</label>
+					</td>
+					<td>
+					<input type="checkbox" id="highlight_token" onchange="setHighlightToken(this)">
+					</td>
+					</tr>
+					<tr>
+					<td>
+					<label for="read_only">Read-only</label>
+					</td>
+					<td>
+					<input type="checkbox" id="read_only" onchange="setReadOnly(this)">
+					</td>
+					</tr>
+					</table>
+				</fieldset>
+				<br/>
+				<fieldset>
+				<legend>Code Quality Control</legend>
+				<label>browser</label>
+				<div class="switch switch-three ios blue">
+					<input id="browser1" name="browser" type="radio" value="default" checked>
+					<label for="browser1" onclick="">default</label>
+					<input id="browser2" name="browser" type="radio" value="on">	
+					<label for="browser2" onclick="">on</label>	
+					<input id="browser3" name="browser" type="radio" value="off">	
+					<label for="browser3" onclick="">off</label>
+					<span class="slide-button"></span>
+				</div>
+				</br>
+				<label>console, alert, .....</label>
+				<div class="switch switch-three ios blue">
+					<input id="devel1" name="devel" type="radio" value="default">
+					<label for="devel1" onclick="">default</label>
+					<input id="devel2" name="devel" type="radio" value="on" checked>	
+					<label for="devel2" onclick="">on</label>	
+					<input id="devel3" name="devel" type="radio" value="off">	
+					<label for="devel3" onclick="">off</label>
+					<span class="slide-button"></span>
+				</div>
+				</br>
+				<label>stop on first error</label>
+				<div class="switch switch-three ios blue">
+					<input id="passfail1" name="passfail" type="radio" value="default" checked>
+					<label for="passfail1" onclick="">default</label>
+					<input id="passfail2" name="passfail" type="radio" value="on">	
+					<label for="passfail2" onclick="">on</label>	
+					<input id="passfail3" name="passfail" type="radio" value="off">	
+					<label for="passfail3" onclick="">off</label>
+					<span class="slide-button"></span>
+				</div>
+				</br>
+				<label>assignment expressions</label>
+				<div class="switch switch-three ios blue">
+					<input id="ass1" name="ass" type="radio" value="default" checked>
+					<label for="ass1" onclick="">default</label>
+					<input id="ass2" name="ass" type="radio" value="on">	
+					<label for="ass2" onclick="">on</label>	
+					<input id="ass3" name="ass" type="radio" value="off">	
+					<label for="ass3" onclick="">off</label>
+					<span class="slide-button"></span>
+				</div>
+				</br>
+				<label>bitwise operators</label>
+				<div class="switch switch-three ios blue">
+					<input id="bitwise1" name="bitwise" type="radio" value="default" checked>
+					<label for="bitwise1" onclick="">default</label>
+					<input id="bitwise2" name="bitwise" type="radio" value="on">	
+					<label for="bitwise2" onclick="">on</label>	
+					<input id="bitwise3" name="bitwise" type="radio" value="off">	
+					<label for="bitwise3" onclick="">off</label>
+					<span class="slide-button"></span>
+				</div>
+				</br>
+				<label>Google closure</label>
+				<div class="switch switch-three ios blue">
+					<input id="closure1" name="closure" type="radio" value="default" checked>
+					<label for="closure1" onclick="">default</label>
+					<input id="closure2" name="closure" type="radio" value="on">	
+					<label for="closure2" onclick="">on</label>	
+					<input id="closure3" name="closure" type="radio" value="off">	
+					<label for="closure3" onclick="">off</label>
+					<span class="slide-button"></span>
+				</div>
+				</br>
+				<label>continue</label>
+				<div class="switch switch-three ios blue">
+					<input id="continue1" name="continue" type="radio" value="default" checked>
+					<label for="continue1" onclick="">default</label>
+					<input id="continue2" name="continue" type="radio" value="on">	
+					<label for="continue2" onclick="">on</label>	
+					<input id="continue3" name="continue" type="radio" value="off">	
+					<label for="continue3" onclick="">off</label>
+					<span class="slide-button"></span>
+				</div>
+				</br>
+				<label>debugger statements</label>
+				<div class="switch switch-three ios blue">
+					<input id="debug1" name="debug" type="radio" value="default" checked>
+					<label for="debug1" onclick="">default</label>
+					<input id="debug2" name="debug" type="radio" value="on">	
+					<label for="debug2" onclick="">on</label>	
+					<input id="debug3" name="debug" type="radio" value="off">	
+					<label for="debug3" onclick="">off</label>
+					<span class="slide-button"></span>
+				</div>
+				</br>
+				<label>== and !=</label>
+				<div class="switch switch-three ios blue">
+					<input id="eqeq1" name="eqeq" type="radio" value="default" checked>
+					<label for="eqeq1" onclick="">default</label>
+					<input id="eqeq2" name="eqeq" type="radio" value="on">	
+					<label for="eqeq2" onclick="">on</label>	
+					<input id="eqeq3" name="eqeq" type="radio" value="off">	
+					<label for="eqeq3" onclick="">off</label>
+					<span class="slide-button"></span>
+				</div>
+				</br>
+				<label>ES5 syntax</label>
+				<div class="switch switch-three ios blue">
+					<input id="es51" name="es5" type="radio" value="default" checked>
+					<label for="es51" onclick="">default</label>
+					<input id="es52" name="es5" type="radio" value="on">	
+					<label for="es52" onclick="">on</label>	
+					<input id="es53" name="es5" type="radio" value="off">	
+					<label for="es53" onclick="">off</label>
+					<span class="slide-button"></span>
+				</div>
+				</br>
+				<label>eval</label>
+				<div class="switch switch-three ios blue">
+					<input id="evil1" name="evil" type="radio" value="default" checked>
+					<label for="evil1" onclick="">default</label>
+					<input id="evil2" name="evil" type="radio" value="on">	
+					<label for="evil2" onclick="">on</label>	
+					<input id="evil3" name="evil" type="radio" value="off">	
+					<label for="evil3" onclick="">off</label>
+					<span class="slide-button"></span>
+				</div>
+				</br>
+				<label>unfiltered for .. in</label>
+				<div class="switch switch-three ios blue">
+					<input id="forin1" name="forin" type="radio" value="default" checked>
+					<label for="forin1" onclick="">default</label>
+					<input id="forin2" name="forin" type="radio" value="on">	
+					<label for="forin2" onclick="">on</label>	
+					<input id="forin3" name="forin" type="radio" value="off">	
+					<label for="forin3" onclick="">off</label>
+					<span class="slide-button"></span>
+				</div>
+				</br>
+				<label>uncapitalized constructors</label>
+				<div class="switch switch-three ios blue">
+					<input id="newcap1" name="newcap" type="radio" value="default" checked>
+					<label for="newcap1" onclick="">default</label>
+					<input id="newcap2" name="newcap" type="radio" value="on">	
+					<label for="newcap2" onclick="">on</label>	
+					<input id="newcap3" name="newcap" type="radio" value="off">	
+					<label for="newcap3" onclick="">off</label>
+					<span class="slide-button"></span>
+				</div>
+				</br>
+				<label>dangling _ in identifiers</label>
+				<div class="switch switch-three ios blue">
+					<input id="nomen1" name="nomen" type="radio" value="default" checked>
+					<label for="nomen1" onclick="">default</label>
+					<input id="nomen2" name="nomen" type="radio" value="on">	
+					<label for="nomen2" onclick="">on</label>	
+					<input id="nomen3" name="nomen" type="radio" value="off">	
+					<label for="nomen3" onclick="">off</label>
+					<span class="slide-button"></span>
+				</div>
+				</br>
+				<label>++ and --</label>
+				<div class="switch switch-three ios blue">
+					<input id="plusplus1" name="plusplus" type="radio" value="default">
+					<label for="plusplus1" onclick="">default</label>
+					<input id="plusplus2" name="plusplus" type="radio" value="on" checked>	
+					<label for="plusplus2" onclick="">on</label>	
+					<input id="plusplus3" name="plusplus" type="radio" value="off">	
+					<label for="plusplus3" onclick="">off</label>
+					<span class="slide-button"></span>
+				</div>
+				</br>
+				<label>. and [^...] in /RegExp/</label>
+				<div class="switch switch-three ios blue">
+					<input id="regexp1" name="regexp" type="radio" value="default" checked>
+					<label for="regexp1" onclick="">default</label>
+					<input id="regexp2" name="regexp" type="radio" value="on">	
+					<label for="regexp2" onclick="">on</label>	
+					<input id="regexp3" name="regexp" type="radio" value="off">	
+					<label for="regexp3" onclick="">off</label>
+					<span class="slide-button"></span>
+				</div>
+				</br>
+				<label>unused parameters</label>
+				<div class="switch switch-three ios blue">
+					<input id="unparam1" name="unparam" type="radio" value="default" checked>
+					<label for="unparam1" onclick="">default</label>
+					<input id="unparam2" name="unparam" type="radio" value="on">	
+					<label for="unparam2" onclick="">on</label>	
+					<input id="unparam3" name="unparam" type="radio" value="off">	
+					<label for="unparam3" onclick="">off</label>
+					<span class="slide-button"></span>
+				</div>
+				</br>
+				<label>missing 'use strict' pragma</label>
+				<div class="switch switch-three ios blue">
+					<input id="sloppy1" name="sloppy" type="radio" value="default" checked>
+					<label for="sloppy1" onclick="">default</label>
+					<input id="sloppy2" name="sloppy" type="radio" value="on">	
+					<label for="sloppy2" onclick="">on</label>	
+					<input id="sloppy3" name="sloppy" type="radio" value="off">	
+					<label for="sloppy3" onclick="">off</label>
+					<span class="slide-button"></span>
+				</div>
+				</br>
+				<label>stupidity</label>
+				<div class="switch switch-three ios blue">
+					<input id="stupid1" name="stupid" type="radio" value="default" checked>
+					<label for="stupid1" onclick="">default</label>
+					<input id="stupid2" name="stupid" type="radio" value="on">	
+					<label for="stupid2" onclick="">on</label>	
+					<input id="stupid3" name="stupid" type="radio" value="off">	
+					<label for="stupid3" onclick="">off</label>
+					<span class="slide-button"></span>
+				</div>
+				</br>
+				<label>inefficient subscripting</label>
+				<div class="switch switch-three ios blue">
+					<input id="sub1" name="sub" type="radio" value="default" checked>
+					<label for="sub1" onclick="">default</label>
+					<input id="sub2" name="sub" type="radio" value="on">	
+					<label for="sub2" onclick="">on</label>	
+					<input id="sub3" name="sub" type="radio" value="off">	
+					<label for="sub3" onclick="">off</label>
+					<span class="slide-button"></span>
+				</div>
+				</br>
+				<label>TODO comments</label>
+				<div class="switch switch-three ios blue">
+					<input id="todo1" name="todo" type="radio" value="default" checked>
+					<label for="todo1" onclick="">default</label>
+					<input id="todo2" name="todo" type="radio" value="on">	
+					<label for="todo2" onclick="">on</label>	
+					<input id="todo3" name="todo" type="radio" value="off">	
+					<label for="todo3" onclick="">off</label>
+					<span class="slide-button"></span>
+				</div>
+				</br>
+				<label>many var statements per function</label>
+				<div class="switch switch-three ios blue">
+					<input id="vars1" name="vars" type="radio" value="default" checked>
+					<label for="vars1" onclick="">default</label>
+					<input id="vars2" name="vars" type="radio" value="on">	
+					<label for="vars2" onclick="">on</label>	
+					<input id="vars3" name="vars" type="radio" value="off">	
+					<label for="vars3" onclick="">off</label>
+					<span class="slide-button"></span>
+				</div>
+				</br>
+				<label>messy white space</label>
+				<div class="switch switch-three ios blue">
+					<input id="white1" name="white" type="radio" value="default">
+					<label for="white1" onclick="">default</label>
+					<input id="white2" name="white" type="radio" value="on" checked>	
+					<label for="white2" onclick="">on</label>	
+					<input id="white3" name="white" type="radio" value="off">	
+					<label for="white3" onclick="">off</label>
+					<span class="slide-button"></span>
+				</div>
+				</br>
+				<label>indentation</label>
+				<div class="jslintsettings">
+					<input id="indent" name="indent" type="text"  value="10"></input>
+				</div>
+				</br>
+				<label>maximum line length</label>
+				<div class="jslintsettings">
+					<input id="maxlen" name="maxlen" type="text"  value="256"></input>
+				</div>
+				</br>
+				<label>maximum number of errors</label>
+				<div class="jslintsettings">
+					<input id="maxerr" name="maxerr" type="text"  value="1000"></input>
+				</div>
+				</fieldset>
+				</div>
+			</div>			
+		</div>
+		</div>
+</div> 
+
+<div id='dockmenucontainer'>
+		<div id='dockmenu'>
+			<img id='graphics-front' 	src='./images/graphics_small.png' title='Graphics' 	alt='./images/graphics_big.png' />
+			<img id='text-back' 		src='./images/text_small.png' title='Text' 			alt='./images/text_big.png' />
+			<img id='debug-right' 		src='./images/debug_small.png' title='Debug' 		alt='./images/debug_big.png' />
+			<img id='help-left' 		src='./images/help_small.png' title='Help' 			alt='./images/help_big.png' />
+			<img id='assessment-top' 	src='./images/assess_small.png' title='Assess' 		alt='./images/assess_big.png' />
+			<img id='misc-bottom' 		src='./images/misc_small.png' title='Misc' 			alt='./images/misc_big.png' />
+		</div>
+</div>			
+
+</body>
+</html>
