@@ -248,7 +248,7 @@ $j(document).ready
 				element.text('Output - Misc');			
 			}
 		}
-		
+				
 		function execute()
 		{
 			var code=getCode();
@@ -260,15 +260,34 @@ $j(document).ready
 			}
 
 			var options=getJSLintOptions();
+			var report=null;
 			
-			if(checkCode(code,options)==true)
-			{
-				displayGraphics();
+			if(checkCode(code,options)===true)
+			{			
+				report=getErrorReport();
+				debugoutput.html(report);
+
+				if(code.match(/graphics\./)===null)
+				{
+					displayText();
+				}
+				else
+				{
+					displayGraphics();
+				}
+
 				executeCode(code);
+
+				var errors=document.getElementById('errorreport');
+				
+				if(errors.rows.length!==0)
+				{
+					displayDebug();
+				}
 			}
 			else
 			{
-				var report=getErrorReport();
+				report=getQualityReport();
 				debugoutput.html(report);
 				displayDebug();
 			}
@@ -312,6 +331,7 @@ $j(document).ready
 			
 			//declare graphics object and public members-functions as globals
 			predef.graphics=true;
+			predef.text=true;
 			
 			options['predef']=predef;
 
@@ -354,11 +374,55 @@ $j(document).ready
 		{
 			$j('#'+facetSelected).jqDock('expand');
 			window.setTimeout(function(){$j('div#dockmenu').jqdock('idle').jqdock('nudge');}, 600);
-		}		
+		}
+
+		fixErrorLog();		
 	}
 );
 
+function fixErrorLog()
+{
+	if (typeof console==="undefined")
+	{
+		return;
+	}
+
+	var oldLog=console.error;
+	var lastLog=null;
+	
+	console.error=function()
+	{
+		//process arguments within the application
+		lastLog=arguments;
+		var message=lastLog[0];
+		message=message.replace('%s',lastLog[1]);
+		message=message.replace('%s',lastLog[2]);
+		
+		var data=document.getElementById('errorreport');
+
+		if(data!==null)
+		{
+			var row=data.insertRow(-1);
+			var cell0=row.insertCell(0);
+			cell0.innerHTML='<span>'+message+'</span>';
+		}
+
+		//call the regular log command
+		oldLog.apply(console, arguments);
+	};
+}
+
 function getErrorReport()
+{
+	var html="";
+
+	html+="<table id='errorreport'>";
+	html+="<caption>Error Report: "+new Date().toLocaleString()+"</caption>";
+	html+="</table>";
+	return html;
+}
+
+function getQualityReport()
 {
 	var data=JSLINT.data();
 	var errors=data.errors;

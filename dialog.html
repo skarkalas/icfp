@@ -1,0 +1,38 @@
+<html>
+<head>
+	<title>Dialog</title>
+	
+	<link rel="stylesheet" type="text/css" href="./styles/jquery-ui-1.10.3.custom.min.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="./styles/dialog.css" media="screen">
+
+	<script type="text/javascript" charset="utf-8" src="./scripts/jquery-2.0.2.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="./scripts/jquery-ui-1.10.3.custom.min.js"></script>	
+	
+	<script type="text/javascript" charset="utf-8" src="./scripts/dialog.js"></script> 	
+
+</head>
+<body>
+
+	<div id="dialog-form" title="User Input">
+		<form>
+		<fieldset>
+			<legend>User Input</legend>
+			<table id='data'>
+			</table>
+		</fieldset>
+		<br/>
+			<table id='buttons'>
+			<tr>
+				<td>
+					<input type='reset' id="reset" value='Reset'></input>
+				</td>
+				<td width='50%'>
+					<input type='button' id="submit" value='Submit' onclick='submitData()'></input>
+				</td>
+			</tr>
+			</table>
+		</form>
+	</div>
+	
+</body>
+</html>

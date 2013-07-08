@@ -14,6 +14,7 @@
 	<script type="text/javascript" charset="utf-8" src="./scripts/jquery-2.0.2.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="./scripts/jquery-ui-1.10.3.custom.min.js"></script>	
 	<script type="text/javascript" charset="utf-8" src="./scripts/graphics.js"></script> 
+	<script type="text/javascript" charset="utf-8" src="./scripts/jstext.js"></script> 
 	<script type="text/javascript" charset="utf-8" src="./scripts/jslint.js"></script> 
 	<script type="text/javascript" charset="utf-8" src="./scripts/aceeditor/ace.js"></script> 
 	<script type="text/javascript" charset="utf-8" src="./scripts/jquery.jqDock.min.js"></script>	
@@ -86,7 +87,9 @@
 							<canvas id="canvas"></canvas>
 						</figure>
 						<figure class="back">
-							<div id="textoutput"></div>
+							<div id="textoutput">
+								<textarea id="textoutputarea" rows="10" cols="50" wrap="off"></textarea> 
+							</div>
 						</figure>
 						<figure class="right">
 							<div id="debugoutput"></div>
@@ -521,9 +524,9 @@
 				</br>
 				<label>missing 'use strict' pragma</label>
 				<div class="switch switch-three ios blue">
-					<input id="sloppy1" name="sloppy" type="radio" value="default" checked>
+					<input id="sloppy1" name="sloppy" type="radio" value="default">
 					<label for="sloppy1" onclick="">default</label>
-					<input id="sloppy2" name="sloppy" type="radio" value="on">	
+					<input id="sloppy2" name="sloppy" type="radio" value="on" checked>	
 					<label for="sloppy2" onclick="">on</label>	
 					<input id="sloppy3" name="sloppy" type="radio" value="off">	
 					<label for="sloppy3" onclick="">off</label>
@@ -565,9 +568,9 @@
 				</br>
 				<label>many var statements per function</label>
 				<div class="switch switch-three ios blue">
-					<input id="vars1" name="vars" type="radio" value="default" checked>
+					<input id="vars1" name="vars" type="radio" value="default">
 					<label for="vars1" onclick="">default</label>
-					<input id="vars2" name="vars" type="radio" value="on">	
+					<input id="vars2" name="vars" type="radio" value="on" checked>	
 					<label for="vars2" onclick="">on</label>	
 					<input id="vars3" name="vars" type="radio" value="off">	
 					<label for="vars3" onclick="">off</label>

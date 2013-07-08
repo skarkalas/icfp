@@ -1,0 +1,35 @@
+body
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+}
+
+legent
+{
+	font-size: 12px;
+}
+
+span
+{
+	display: inline-block;
+	vertical-align: middle;
+	line-height: normal;      
+}
+
+input
+{
+	text-align: center;
+	width: 100%;
+}
+
+table
+{
+	margin-left: auto;
+	margin-right: auto;
+/*	border: 1px solid black; */
+}
+
+td
+{
+	padding: 10px;
+}
